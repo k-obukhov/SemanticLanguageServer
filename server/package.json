@@ -1,0 +1,13 @@
+{
+	"name": "lsp-semantic-language-server",
+	"description": "Example implementation of a LSP for SL",
+	"version": "1.0.0",
+	"author": "NothingIsGood",
+	"engines": {
+		"node": "*"
+	},
+	"dependencies": {
+		"vscode-languageserver": "^4.1.3"
+	},
+	"scripts": {}
+}
