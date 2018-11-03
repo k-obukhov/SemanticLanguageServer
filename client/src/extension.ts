@@ -73,7 +73,11 @@ export function activate(context: ExtensionContext) {
 			if(!fs.existsSync(pfile)) 
 			{
 				vscode.window.showInformationMessage('SL Project Created, Main file = ' + pfile);
-				vscode.commands.executeCommand('vscode.openFile', pfile);
+
+				let setting: vscode.Uri = vscode.Uri.parse(pfile);
+				vscode.workspace.openTextDocument(setting).then((a: vscode.TextDocument) => {
+					vscode.window.showTextDocument(a, 1, false);
+				});
 			}
 			else 
 			{

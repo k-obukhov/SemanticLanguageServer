@@ -6,6 +6,7 @@ Based on https://code.visualstudio.com/docs/extensions/example-language-server.
 
 This Language Server works for Semantic Language (.sl) file. It has the following language features:
 - Diagnostics regenerated on each file change or configuration change
+- Command `SL: Init Project` for project initialization of workspace folder
 
 It also includes an End-to-End test.
 
