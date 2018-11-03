@@ -4,6 +4,8 @@
  * ------------------------------------------------------------------------------------------ */
 
 import * as path from 'path';
+import * as vscode from 'vscode';
+const fs = require('fs');
 import { workspace, ExtensionContext } from 'vscode';
 
 import {
@@ -16,6 +18,7 @@ import {
 let client: LanguageClient; 
 
 export function activate(context: ExtensionContext) {
+
 	// The server is implemented in node
 	let serverModule = context.asAbsolutePath(
 		path.join('server', 'out', 'server.js')
@@ -52,9 +55,32 @@ export function activate(context: ExtensionContext) {
 		serverOptions,
 		clientOptions
 	);
-
-	// Start the client. This will also launch the server
+	
 	client.start();
+	
+	let v = vscode.commands.registerCommand('ext.CreateProject', 
+	() => {
+		let projectName : string = 'project';
+
+		let dir : string = "C:/" + projectName ;
+		let pfile : string = dir + "/" + "Main.sl";
+
+		if(!fs.existsSync(dir) && fs.mkdirSync(dir)){};
+
+		fs.writeFile(pfile,'module Main\nstart\n\toutput \"Hello World!\";\nend Main.', "utf-8", 
+			(err) => {if(err) throw err; console.log("Project was created");
+		});
+		
+		if(!fs.existsSync(pfile)) 
+		{
+			vscode.window.showInformationMessage('SL Project Created');
+		}
+		else 
+		{
+			vscode.window.showErrorMessage('Project Error');
+		}
+	});
+	context.subscriptions.push(v);
 }
 
 export function deactivate(): Thenable<void> | undefined {

@@ -18,6 +18,10 @@
 	],
 	"main": "./client/out/extension",
 	"contributes": {
+		"commands": {
+			"command": "ext.CreateProject",
+			"title": "Create Project SL"
+		},
 		"configuration": {
 			"type": "object",
 			"title": "Example configuration",

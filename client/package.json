@@ -4,7 +4,9 @@
 	"author": "NothingIsGood",
 	"version": "0.0.1",
 	"publisher": "NothingIsGood",
-	
+	"activationEvents": [
+		"onCommand:ext.CreateProject"
+	],
 	"engines": {
 		"vscode": "^1.23.0"
 	},
