@@ -58,27 +58,33 @@ export function activate(context: ExtensionContext) {
 	
 	client.start();
 	
-	let v = vscode.commands.registerCommand('ext.CreateProject', 
+	let v = vscode.commands.registerCommand('ext.InitProject', 
 	() => {
-		let projectName : string = 'project';
-
-		let dir : string = "C:/" + projectName ;
-		let pfile : string = dir + "/" + "Main.sl";
-
-		if(!fs.existsSync(dir) && fs.mkdirSync(dir)){};
-
-		fs.writeFile(pfile,'module Main\nstart\n\toutput \"Hello World!\";\nend Main.', "utf-8", 
-			(err) => {if(err) throw err; console.log("Project was created");
-		});
-		
-		if(!fs.existsSync(pfile)) 
+		// Берём первую выбранную папку
+		if (vscode.workspace.workspaceFolders.length > 0)
 		{
-			vscode.window.showInformationMessage('SL Project Created');
+			let dir : string = vscode.workspace.workspaceFolders[0].uri.fsPath ;
+			let pfile : string = path.join(dir, "Main.sl");
+			
+			fs.writeFile(pfile,'module Main\nstart\n\toutput \"Hello World!\";\nend Main.', "utf-8", 
+				(err) => {if(err) throw err; console.log("Project was created");
+			});
+			
+			if(!fs.existsSync(pfile)) 
+			{
+				vscode.window.showInformationMessage('SL Project Created, Main file = ' + pfile);
+				vscode.commands.executeCommand('vscode.openFile', pfile);
+			}
+			else 
+			{
+				vscode.window.showErrorMessage('Project Error');
+			}
 		}
 		else 
 		{
-			vscode.window.showErrorMessage('Project Error');
+			vscode.window.showErrorMessage('Project folder not found — please create or open new folder in current workspace');
 		}
+		
 	});
 	context.subscriptions.push(v);
 }

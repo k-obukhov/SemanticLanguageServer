@@ -19,8 +19,8 @@
 	"main": "./client/out/extension",
 	"contributes": {
 		"commands": {
-			"command": "ext.CreateProject",
-			"title": "Create Project SL"
+			"command": "ext.InitProject",
+			"title": "SL: Init project in first folder of workspace"
 		},
 		"configuration": {
 			"type": "object",
