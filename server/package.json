@@ -9,5 +9,6 @@
 	"dependencies": {
 		"vscode-languageserver": "^4.1.3"
 	},
-	"scripts": {}
+	"scripts": {
+	}
 }

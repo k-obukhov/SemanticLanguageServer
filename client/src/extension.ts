@@ -14,6 +14,7 @@ import {
 	ServerOptions,
 	TransportKind
 } from 'vscode-languageclient';
+import { Script } from 'vm';
 
 let client: LanguageClient; 
 
@@ -92,6 +93,18 @@ export function activate(context: ExtensionContext) {
 	});
 	context.subscriptions.push(v);
 
+	const exec = require('child_process').exec;
+	const testscript = exec('cd ../csharp && dotnet restore && dotnet run');
+
+	testscript.stdout.on('data', function(data){
+		console.log(data); 
+		// sendBackInfo();
+	});
+	
+	testscript.stderr.on('data', function(data){
+		console.log(data);
+		// triggerErrorStuff(); 
+	});
 }
 
 export function deactivate(): Thenable<void> | undefined {
