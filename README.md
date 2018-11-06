@@ -5,6 +5,7 @@ Based on https://code.visualstudio.com/docs/extensions/example-language-server.
 ## Functionality
 
 This Language Server works for Semantic Language (.sl) file. It has the following language features:
+
 - Diagnostics regenerated on each file change or configuration change
 - Command `SL: Init Project` for project initialization of workspace folder
 
@@ -44,4 +45,3 @@ It also includes an End-to-End test.
 
 - You can use `Antlr4 Code Generator` extension from NuGet
 - With Antlr, you can use command `antlr4-csharp-4.6.5-complete.jar -visitor -listener -package SemanticLanguageGrammar -o SemanticLanguageGrammar -Dlanguage=CSharp_v4_5 SLGrammar.g4` in Command Prompt(Windows)
-

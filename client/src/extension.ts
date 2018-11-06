@@ -91,6 +91,7 @@ export function activate(context: ExtensionContext) {
 		
 	});
 	context.subscriptions.push(v);
+
 }
 
 export function deactivate(): Thenable<void> | undefined {

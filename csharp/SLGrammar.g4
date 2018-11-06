@@ -142,7 +142,7 @@ simpleLet : Id AssignToken mathExpression | Id AssignToken boolExpression | Id A
 arrayLet: arrayElement AssignToken mathExpression | arrayElement AssignToken boolExpression | arrayElement AssignToken let;
 
 return_val: Return (exp)?;
-input: Input Id;
+input: Input (id | arrayElement);
 output: Output outputArgument (Comma outputArgument)*;
 outputArgument: StringLiteral | exp;
 
