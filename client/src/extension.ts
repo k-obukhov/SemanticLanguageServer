@@ -4,9 +4,10 @@
  * ------------------------------------------------------------------------------------------ */
 
 import * as path from 'path';
-import * as vscode from 'vscode';
 const fs = require('fs');
-import { workspace, ExtensionContext } from 'vscode';
+
+import { workspace, ExtensionContext, commands } from 'vscode';
+import * as vscode from 'vscode';
 
 import {
 	LanguageClient,
@@ -18,7 +19,16 @@ import { Script } from 'vm';
 
 let client: LanguageClient; 
 
-export function activate(context: ExtensionContext) {
+export async function activate(context: ExtensionContext) {
+
+	context.subscriptions.push(vscode.commands.registerCommand('terminalTest.createAndSend', async () => {
+		const terminal = vscode.window.createTerminal('Ext Terminal');
+		let path_ext: string = context.extensionPath;
+		terminal.sendText(`cd ${path_ext}; cd csharp; dotnet restore; dotnet run`);
+	}));
+
+	vscode.window.showInformationMessage("Language server of SL is running...");
+	await vscode.commands.executeCommand('terminalTest.createAndSend');
 
 	// The server is implemented in node
 	let serverModule = context.asAbsolutePath(
@@ -92,6 +102,8 @@ export function activate(context: ExtensionContext) {
 		
 	});
 	context.subscriptions.push(v);
+
+	//vscode.commands.executeCommand('workbench.action.terminal.');
 }
 
 export function deactivate(): Thenable<void> | undefined {
