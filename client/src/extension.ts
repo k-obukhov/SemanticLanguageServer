@@ -22,7 +22,7 @@ let client: LanguageClient;
 export async function activate(context: ExtensionContext) {
 
 	context.subscriptions.push(vscode.commands.registerCommand('terminalTest.createAndSend', async () => {
-		const terminal = vscode.window.createTerminal('Ext Terminal');
+		const terminal = vscode.window.createTerminal('SL Diagnostic Terminal');
 		let path_ext: string = context.extensionPath;
 		terminal.sendText(`cd ${path_ext}; cd csharp; dotnet restore; dotnet run`);
 	}));

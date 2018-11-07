@@ -1,9 +1,10 @@
 {
 	"name": "lsp-semantic-language",
+	"displayName": "SemanticLanguageServer",
 	"description": "A language server for VSCode",
 	"author": "NothingIsGood",
 
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"publisher": "NothingIsGood",
 
 	"repository": {
