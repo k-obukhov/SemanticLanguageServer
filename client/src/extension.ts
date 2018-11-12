@@ -27,7 +27,7 @@ export async function activate(context: ExtensionContext) {
 		terminal.sendText(`cd ${path_ext}; cd csharp; dotnet restore; dotnet run`);
 	}));
 
-	vscode.window.showInformationMessage("Language server of SL is running...");
+	vscode.window.showInformationMessage("Language server of SL is starting...");
 	await vscode.commands.executeCommand('terminalTest.createAndSend');
 
 	// The server is implemented in node
@@ -71,39 +71,41 @@ export async function activate(context: ExtensionContext) {
 	
 	let v = vscode.commands.registerCommand('ext.InitProject', 
 	() => {
-		// Берём первую выбранную папку
-		if (vscode.workspace.workspaceFolders.length > 0)
-		{
-			let dir : string = vscode.workspace.workspaceFolders[0].uri.fsPath ;
-			let pfile : string = path.join(dir, "Main.sl");
-			
-			fs.writeFile(pfile,'module Main\nstart\n\toutput \"Hello World!\";\nend Main.', "utf-8", 
-				(err) => {if(err) throw err; console.log("Project was created");
-			});
-			
-			if(!fs.existsSync(pfile)) 
-			{
-				vscode.window.showInformationMessage('SL Project Created, Main file = ' + pfile);
-
-				let setting: vscode.Uri = vscode.Uri.parse(pfile);
-				vscode.workspace.openTextDocument(setting).then((a: vscode.TextDocument) => {
-					vscode.window.showTextDocument(a, 1, false);
-				});
-			}
-			else 
-			{
-				vscode.window.showErrorMessage('Project Error');
-			}
-		}
-		else 
-		{
-			vscode.window.showErrorMessage('Project folder not found — please create or open new folder in current workspace');
-		}
 		
+		const options: vscode.OpenDialogOptions = {
+			canSelectMany: false,
+			canSelectFolders: true,
+			canSelectFiles: false,
+			openLabel: 'Choose project folder',
+			defaultUri: vscode.workspace.workspaceFolders[0].uri
+	    };
+   
+	    vscode.window.showOpenDialog(options).then(fileUri => {
+			if (fileUri && fileUri[0]) 
+			{
+				let dir : string = fileUri[0].fsPath;
+				let pfile : string = path.join(dir, "Main.sl");
+				
+				fs.writeFile(pfile,'module Main\nstart\n\toutput \"Hello World!\";\nend Main.', "utf-8", 
+					(err) => {if(err) throw err; console.log("Project was created");
+				});
+				
+				if(!fs.existsSync(pfile)) 
+				{
+					vscode.window.showInformationMessage(`SL Project Created, Main file = ${pfile}`);
+					
+					vscode.workspace.openTextDocument(pfile).then((a: vscode.TextDocument) => {
+						vscode.window.showTextDocument(a, 1, false);
+					});
+				}
+				else 
+				{
+					vscode.window.showErrorMessage('Project Error');
+				}
+		    }
+	    });
 	});
 	context.subscriptions.push(v);
-
-	//vscode.commands.executeCommand('workbench.action.terminal.');
 }
 
 export function deactivate(): Thenable<void> | undefined {

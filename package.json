@@ -20,13 +20,13 @@
 		"vscode": "^1.23.0"
 	},
 	"activationEvents": [
-		"onLanguage:semanticlanguage"
+		"*"
 	],
 	"main": "./client/out/extension",
 	"contributes": {
 		"commands": {
 			"command": "ext.InitProject",
-			"title": "SL: Init project in first folder of workspace"
+			"title": "SL: Create new project in current workspace"
 		},
 		"configuration": {
 			"type": "object",
