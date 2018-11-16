@@ -4,7 +4,7 @@
 	"description": "A language server for VSCode",
 	"author": "NothingIsGood",
 
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"publisher": "NothingIsGood",
 
 	"repository": {
