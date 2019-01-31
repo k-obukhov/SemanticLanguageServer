@@ -37,7 +37,7 @@ It also includes an End-to-End test.
 - Run the lauch config.
 - If you want to debug the server as well use the launch configuration `Attach to Server`
 - In the [Extension Development Host] instance of VSCode, open a document in 'semanticlanguage' language mode.
-  - Syntax Error handling
+- Syntax Error handling
 
 ## Working with grammar
 

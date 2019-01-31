@@ -201,14 +201,6 @@ public interface ISLGrammarVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitIfElseIfElse([NotNull] SLGrammarParser.IfElseIfElseContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by the <c>IfElse</c>
-	/// labeled alternative in <see cref="SLGrammarParser.if_cond"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitIfElse([NotNull] SLGrammarParser.IfElseContext context);
-
-	/// <summary>
 	/// Visit a parse tree produced by the <c>IfSingle</c>
 	/// labeled alternative in <see cref="SLGrammarParser.if_cond"/>.
 	/// </summary>
@@ -317,18 +309,18 @@ public interface ISLGrammarVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitSimpleType([NotNull] SLGrammarParser.SimpleTypeContext context);
 
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="SLGrammarParser.procedureType"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitProcedureType([NotNull] SLGrammarParser.ProcedureTypeContext context);
-
-	/// <summary>
 	/// Visit a parse tree produced by <see cref="SLGrammarParser.functionType"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitFunctionType([NotNull] SLGrammarParser.FunctionTypeContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="SLGrammarParser.procedureType"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitProcedureType([NotNull] SLGrammarParser.ProcedureTypeContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="SLGrammarParser.functionalArgList"/>.
@@ -394,6 +386,83 @@ public interface ISLGrammarVisitor<Result> : IParseTreeVisitor<Result> {
 	Result VisitModuleDeclare([NotNull] SLGrammarParser.ModuleDeclareContext context);
 
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="SLGrammarParser.base_head"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitBase_head([NotNull] SLGrammarParser.Base_headContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="SLGrammarParser.inherit_head"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInherit_head([NotNull] SLGrammarParser.Inherit_headContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="SLGrammarParser.classDeclare"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitClassDeclare([NotNull] SLGrammarParser.ClassDeclareContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="SLGrammarParser.classStatements"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitClassStatements([NotNull] SLGrammarParser.ClassStatementsContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="SLGrammarParser.methodDeclare"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMethodDeclare([NotNull] SLGrammarParser.MethodDeclareContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="SLGrammarParser.thisHeader"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitThisHeader([NotNull] SLGrammarParser.ThisHeaderContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="SLGrammarParser.methodFuncAbstract"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMethodFuncAbstract([NotNull] SLGrammarParser.MethodFuncAbstractContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="SLGrammarParser.methodProcAbstract"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMethodProcAbstract([NotNull] SLGrammarParser.MethodProcAbstractContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="SLGrammarParser.methodFuncDeclare"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMethodFuncDeclare([NotNull] SLGrammarParser.MethodFuncDeclareContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="SLGrammarParser.methodProcDeclare"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMethodProcDeclare([NotNull] SLGrammarParser.MethodProcDeclareContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="SLGrammarParser.fieldDeclare"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFieldDeclare([NotNull] SLGrammarParser.FieldDeclareContext context);
+
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="SLGrammarParser.functionDeclare"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -406,6 +475,13 @@ public interface ISLGrammarVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitProcedureDeclare([NotNull] SLGrammarParser.ProcedureDeclareContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="SLGrammarParser.varModuleDeclare"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitVarModuleDeclare([NotNull] SLGrammarParser.VarModuleDeclareContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="SLGrammarParser.functionalDeclareArgList"/>.
@@ -539,6 +615,13 @@ public interface ISLGrammarVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitArrayLet([NotNull] SLGrammarParser.ArrayLetContext context);
+
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="SLGrammarParser.using"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitUsing([NotNull] SLGrammarParser.UsingContext context);
 
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="SLGrammarParser.return_val"/>.

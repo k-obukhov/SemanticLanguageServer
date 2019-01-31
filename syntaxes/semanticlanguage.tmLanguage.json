@@ -1,0 +1,209 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Semantic Language",
+    "patterns": [
+        {
+            "include": "#comments"
+        },
+        {
+            "include": "#literals"
+        },
+        {
+            "include": "#imports"
+        },
+        {
+            "include": "#module"
+        },
+        {
+            "include": "#types"
+        },
+        {
+            "include": "#modifiers"
+        },
+        {
+            "include": "#keywords"
+        }
+    ],
+    "repository": {
+        "comments": {
+            "patterns": [
+                {
+                    "begin": "/\\*",
+                    "end": "\\*/",
+                    "name": "comment.block.semanticlanguage"
+                },
+                {
+                    "begin": "//",
+                    "end": "\\n",
+                    "name": "comment.line.semanticlanguage"
+                }
+            ]
+        },
+        "literals": {
+            "patterns": [
+                {
+                    "include": "#strings"
+                },
+                {
+                    "include": "#numbers"
+                }
+            ],
+            "repository": {
+                "strings": {
+                    "name": "string.quoted.double.semanticlanguage",
+                    "begin": "\"",
+                    "end": "\"",
+                    "patterns": [
+                        {
+                            "name": "constant.character.escape.semanticlanguage",
+                            "match": "\\\\."
+                        }
+                    ]
+                },
+                "numbers": {
+                    "patterns": [
+                        {
+							"name": "constant.numeric.decimal.semanticlanguage",
+							"match": "\\b[0-9_]+(e|E)[0-9_]\\b"
+						},
+						{
+							"name": "constant.numeric.decimal.semanticlanguage",
+							"match": "\\b([0-9_]+)?\\.[0-9_]+((e|E)[0-9]+)?\\b"
+						},
+						{
+							"name": "constant.numeric.decimal.semanticlanguage",
+							"match": "\\b[0-9_]\\b"
+						}
+                    ]
+                }
+            }
+        },
+        "modifiers": {
+            "patterns": [
+                {
+                    "name": "storage.modifier.semanticlanguage",
+                    "match": "\\b(public|private|const)\\b"
+                },
+                {
+                    "name": "storage.modifier.semanticlanguage",
+                    "match": "\\b(открытое|закрытое|константа)\\b"
+                }
+            ]
+        },
+        "types": {
+			"patterns": [
+				{
+					"include": "#primitive"
+				},
+				{
+					"include": "#array"
+				}
+			],
+			"repository":
+			 {
+				"primitive": {
+                    "patterns": [
+                        {
+                            "match": "\\b(integer|real|boolean|character|class)\\b",
+                            "name": "storage.type.primitive.semanticlanguage"
+                        },
+                        {
+                            "match": "\\b(целое|вещественное|булев|символ|класс)\\b",
+                            "name": "storage.type.primitive.semanticlanguage"
+                        }
+                    ]
+                },
+                "array": {
+                    "patterns": [
+                        {
+                            "match": "\\b(array)\\b",
+                            "name": "storage.type.array.semanticlanguage"
+                        },
+                        {
+                            "match": "\\b(массив)\\b",
+                            "name": "storage.type.array.semanticlanguage"
+                        }
+                    ]
+                }
+            }
+        },
+        "keywords": {
+            "patterns":  [
+                {
+                    "name": "keyword.control.semanticlanguage",
+                    "match": "\\b(if|while|elseif|else|repeat|then|do|using)\\b"
+                },
+                {
+                    "name": "keyword.control.semanticlanguage",
+                    "match": "\\b(если|пока|иначе-если|иначе|повторять|тогда|выполнять|использовать)\\b"
+                },
+                {
+                    "name": "keyword.iofunc.semanticlanguage",
+                    "match": "\\b(input|output)\\b"
+                },
+                {
+                    "name": "keyword.iofunc.semanticlanguage",
+                    "match": "\\b(ввод|вывод)\\b"
+                },
+                {
+                    "name": "keyword.functions.semanticlanguage",
+                    "match": "\\b(val|ref|function|procedure|call|return)\\b"
+                },
+                {
+                    "name": "keyword.functions.semanticlanguage",
+                    "match": "\\b(вх|перем|функция|процедура|вызвать|возврат)\\b"
+                },
+                {
+                    "name": "keyword.other.semanticlanguage",
+                    "match": "\\b(nil|true|false|module|import|end|start|let|variable|new|inherit|base|override|abstract)\\b"
+                },
+                {
+                    "name": "keyword.other.semanticlanguage",
+                    "match": "\\b(пустое|истина|ложь|модуль|подключить|конец|старт|пусть|переменная|новый|наследует|базовый|перегружает|абстрактный)\\b"
+                }
+            ]
+        },
+        "imports": {
+            "patterns": [
+                {
+                    "match": "(import|подключить)\\s+([a-zA-Z0-9]+)",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.other.import.semanticlanguage"
+                        },
+                        "2": {
+                            "name": "entity.name.type.module.semanticlanguage"
+                        }
+                    }
+                }
+            ]
+        },
+        "module": {
+            "patterns": [
+                {
+                    "match": "(module|модуль)\\s+([a-zA-Z0-9]+)",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.other.import.semanticlanguage"
+                        },
+                        "2": {
+                            "name": "entity.name.type.module.semanticlanguage"
+                        }
+                    }
+                },
+                {
+					"match": "(end|конец)\\s+([a-zA-Z0-9]+)",
+					"captures": {
+						"1": {
+							"name": "keyword.other.import.semanticlanguage"
+						},
+						"2": {
+							"name": "entity.name.type.module.semanticlanguage"
+						}
+					}
+				}
+            ]
+        }
+    },
+    "scopeName": "source.semlang"
+}

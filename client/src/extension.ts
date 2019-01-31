@@ -2,6 +2,8 @@
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  * ------------------------------------------------------------------------------------------ */
+import * as dotnet from './dotnet';
+import * as executables from './executables';
 
 import * as path from 'path';
 const fs = require('fs');
@@ -21,15 +23,6 @@ let client: LanguageClient;
 
 export async function activate(context: ExtensionContext) {
 
-	context.subscriptions.push(vscode.commands.registerCommand('terminalTest.createAndSend', async () => {
-		const terminal = vscode.window.createTerminal('SL Diagnostic Terminal');
-		let path_ext: string = context.extensionPath;
-		terminal.sendText(`cd ${path_ext}; cd csharp; dotnet restore; dotnet run`);
-	}));
-
-	vscode.window.showInformationMessage("Language server of SL is starting...");
-	await vscode.commands.executeCommand('terminalTest.createAndSend');
-
 	// The server is implemented in node
 	let serverModule = context.asAbsolutePath(
 		path.join('server', 'out', 'server.js')
@@ -40,6 +33,19 @@ export async function activate(context: ExtensionContext) {
 
 	// If the extension is launched in debug mode then the debug server options are used
 	// Otherwise the run options are used
+	const dotNetExecutable = await executables.find('dotnet');
+	const serverAssembly = context.asAbsolutePath('csharp/bin/Debug/netcoreapp2.1/AntlrServer.dll');
+	
+	if (dotNetExecutable === null)
+	{
+		vscode.window.showErrorMessage("You don't have .Net Core Support!");
+	}
+	else
+	{
+		const terminal = vscode.window.createTerminal('SL Diagnostic Terminal');
+		terminal.sendText(`dotnet ${serverAssembly}`);
+	}
+	
 	let serverOptions: ServerOptions = {
 		run: { module: serverModule, transport: TransportKind.ipc },
 		debug: {
