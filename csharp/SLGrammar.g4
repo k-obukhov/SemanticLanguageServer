@@ -175,9 +175,9 @@ declare: constDeclare | varDeclare; // Определение констант и переменных
 constDeclare: Const typeName Id AssignToken (mathExpression | boolExpression);
 varDeclare: scalarDeclare | arrayDeclare | ptrDeclare;
 
-scalarDeclare: Variable scalarType Id (AssignToken mathExpression | AssignToken boolExpression);
-arrayDeclare: arrayDeclareType Id (AssignToken mathExpression); // выражение
-ptrDeclare: Variable ptrType Id (AssignToken mathExpression); // всего скорее, без адресной арифметики -- нужен только expAtom для указателей -- new, nil
+scalarDeclare: Variable scalarType Id (AssignToken mathExpression | AssignToken boolExpression)?;
+arrayDeclare: arrayDeclareType Id (AssignToken mathExpression)?; // выражение
+ptrDeclare: Variable ptrType Id (AssignToken mathExpression)?; // всего скорее, без адресной арифметики -- нужен только expAtom для указателей -- new, nil
 
 arrayDeclareType: ArrayToken (arrayDeclareDimention)+ scalarType;
 arrayDeclareDimention: LSBrace mathExpression RSBrace;
@@ -272,7 +272,7 @@ expAtom: call | arrayLenProperty | arrayElement | id | (IntValue | RealValue | B
 id: (Id Point)? Id;
 SimpleType: Real | Integer | Boolean | Character;
 
-array: LABrace (expAtom | (Comma expAtom)*)  RABrace;
+array: LABrace (expAtom (Comma expAtom)*)  RABrace;
 
 exp: mathExpression | boolExpression;
 
