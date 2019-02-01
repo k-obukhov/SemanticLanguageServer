@@ -446,6 +446,17 @@ public interface ISLGrammarListener : IParseTreeListener {
 	void ExitTypeName([NotNull] SLGrammarParser.TypeNameContext context);
 
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="SLGrammarParser.ptrType"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPtrType([NotNull] SLGrammarParser.PtrTypeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="SLGrammarParser.ptrType"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPtrType([NotNull] SLGrammarParser.PtrTypeContext context);
+
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="SLGrammarParser.scalarType"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -842,17 +853,6 @@ public interface ISLGrammarListener : IParseTreeListener {
 	void ExitDeclare([NotNull] SLGrammarParser.DeclareContext context);
 
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="SLGrammarParser.varDeclare"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterVarDeclare([NotNull] SLGrammarParser.VarDeclareContext context);
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="SLGrammarParser.varDeclare"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitVarDeclare([NotNull] SLGrammarParser.VarDeclareContext context);
-
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="SLGrammarParser.constDeclare"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -862,6 +862,17 @@ public interface ISLGrammarListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitConstDeclare([NotNull] SLGrammarParser.ConstDeclareContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="SLGrammarParser.varDeclare"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterVarDeclare([NotNull] SLGrammarParser.VarDeclareContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="SLGrammarParser.varDeclare"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitVarDeclare([NotNull] SLGrammarParser.VarDeclareContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="SLGrammarParser.scalarDeclare"/>.
@@ -884,6 +895,17 @@ public interface ISLGrammarListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitArrayDeclare([NotNull] SLGrammarParser.ArrayDeclareContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="SLGrammarParser.ptrDeclare"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPtrDeclare([NotNull] SLGrammarParser.PtrDeclareContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="SLGrammarParser.ptrDeclare"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPtrDeclare([NotNull] SLGrammarParser.PtrDeclareContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="SLGrammarParser.arrayDeclareType"/>.
@@ -1183,6 +1205,28 @@ public interface ISLGrammarListener : IParseTreeListener {
 	void ExitBoolFactor([NotNull] SLGrammarParser.BoolFactorContext context);
 
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="SLGrammarParser.newExp"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterNewExp([NotNull] SLGrammarParser.NewExpContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="SLGrammarParser.newExp"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitNewExp([NotNull] SLGrammarParser.NewExpContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="SLGrammarParser.ptrExpAtom"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterPtrExpAtom([NotNull] SLGrammarParser.PtrExpAtomContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="SLGrammarParser.ptrExpAtom"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitPtrExpAtom([NotNull] SLGrammarParser.PtrExpAtomContext context);
+
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="SLGrammarParser.expAtom"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -1203,6 +1247,17 @@ public interface ISLGrammarListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitId([NotNull] SLGrammarParser.IdContext context);
+
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="SLGrammarParser.array"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterArray([NotNull] SLGrammarParser.ArrayContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="SLGrammarParser.array"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitArray([NotNull] SLGrammarParser.ArrayContext context);
 
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="SLGrammarParser.exp"/>.

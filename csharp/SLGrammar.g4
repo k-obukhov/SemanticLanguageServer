@@ -60,6 +60,7 @@ End: 'end';
 
 Function: 'function';
 Procedure: 'procedure';
+Using: 'using';
 
 // круглые и квадратные скобки
 LBrace: '(';
@@ -67,6 +68,9 @@ RBrace: ')';
 
 LSBrace: '[';
 RSBrace: ']';
+
+LABrace: '{';
+RABrace: '}';
 
 AssignToken: ':='; // Присваивание
 
@@ -76,13 +80,19 @@ fragment Real: 'real';
 fragment Character: 'character'; // | 'char'
 fragment Boolean: 'boolean'; // | 'bool'
 
+// Токены для указателей
+New: 'new'; // выделение памяти
+Nil: 'nil'; // значение null
+Pointer: 'pointer'; // указатель
+
 typeName: scalarType | arrayType;
-scalarType: simpleType | functionalType;
+ptrType: Pointer LBrace id RBrace; // id -- тип
+scalarType: simpleType | functionalType | id | ptrType;
 functionalType: procedureType | functionType; // Функциональный тип = процедуры и функции
 simpleType : SimpleType; // Встроенные типы 
 
-procedureType: Procedure functionalArgList Colon typeName; // Тип функция
-functionType: Function functionalArgList;                // Тип процедура
+functionType: Procedure functionalArgList Colon typeName; // Тип функция
+procedureType: Function functionalArgList;                // Тип процедура
 
 functionalArgList: LBrace (functionalArg(Comma functionalArg) | /* nothing */) RBrace;
 functionalArg: FunctionArgModifier typeName;
@@ -105,9 +115,43 @@ moduleImportList: (moduleImport | raw)*;
 moduleImport: ImportToken Id;
 module: ModuleToken Id moduleDeclare moduleEntry;
 
-moduleDeclare: (functionDeclare | procedureDeclare | raw)*; // Определение модуля 
+moduleDeclare: (functionDeclare | procedureDeclare | raw | varModuleDeclare | classDeclare)*; // Определение модуля 
+
+
+/// Object-Oriented part!
+// Lexer rules
+Class: 'class';
+
+Inherit: 'inherit'; // Класс наследует что-либо
+Base: 'base'; // От класса можно наследоваться 
+
+Abstract: 'abstract';
+
+Override: 'override'; // Метод переопределяется
+
+// Parser rules
+base_head: (Base)?;
+inherit_head: (Inherit LBrace id RBrace)?;
+
+classDeclare: AccessModifier base_head Class Id inherit_head classStatements End;
+//classDeclare: AccessModifier Id Class;
+classStatements: (methodDeclare | raw | fieldDeclare)*;
+methodDeclare: methodFuncDeclare | methodProcDeclare | methodFuncAbstract | methodProcAbstract;
+
+thisHeader: LBrace Id Colon id RBrace;
+
+methodFuncAbstract: AccessModifier Abstract thisHeader Function functionalDeclareArgList Colon typeName Id Semicolon;
+methodProcAbstract: AccessModifier Abstract thisHeader Procedure functionalDeclareArgList Id Semicolon;
+
+methodFuncDeclare: AccessModifier (Override)? thisHeader Function functionalDeclareArgList Colon typeName Id statementSeq End;
+methodProcDeclare: AccessModifier (Override)? thisHeader Procedure functionalDeclareArgList Id statementSeq End;
+
+fieldDeclare: AccessModifier varDeclare Semicolon;
+// end OOP
+
 functionDeclare: AccessModifier Function functionalDeclareArgList Colon typeName Id statementSeq End; // Функции
 procedureDeclare: AccessModifier Procedure functionalDeclareArgList Id statementSeq End; // Процедура
+varModuleDeclare: AccessModifier declare Semicolon;
 
 functionalDeclareArgList : LBrace (functionalDeclareArg (Comma functionalDeclareArg)* | /* нет аргументов */ )  RBrace; 
 
@@ -119,30 +163,34 @@ statementSeq: (statement | raw)*;
 
 statement: simpleStatement | complexStatement;
 
-simpleStatement: (declare | let | input | output | return_val | call) Semicolon; // Операторы
+simpleStatement: (declare | let | input | output | return_val | call | using) Semicolon; // Операторы
 complexStatement: if_cond | while_cond | repeat;
 
 declare: constDeclare | varDeclare; // Определение констант и переменных
-varDeclare: scalarDeclare | arrayDeclare;
+
 
 // Определение констант и переменных
 // Константы -- простые типы языка (на текущий момент)
 
-constDeclare: Const simpleType Id AssignToken (mathExpression | boolExpression);
+constDeclare: Const typeName Id AssignToken (mathExpression | boolExpression);
+varDeclare: scalarDeclare | arrayDeclare | ptrDeclare;
+
 scalarDeclare: Variable scalarType Id (AssignToken mathExpression | AssignToken boolExpression);
-arrayDeclare: Variable arrayDeclareType Id;
+arrayDeclare: arrayDeclareType Id (AssignToken mathExpression); // выражение
+ptrDeclare: Variable ptrType Id (AssignToken mathExpression); // всего скорее, без адресной арифметики -- нужен только expAtom для указателей -- new, nil
 
 arrayDeclareType: ArrayToken (arrayDeclareDimention)+ scalarType;
 arrayDeclareDimention: LSBrace mathExpression RSBrace;
-arrayElement: Id (arrayDeclareDimention)+;
-arrayLenProperty: Id Point Length LBrace IntValue RBrace;
+arrayElement: id (arrayDeclareDimention)+;
+arrayLenProperty: id Point Length LBrace IntValue RBrace;
 
 let: Let (simpleLet | arrayLet);
-simpleLet : Id AssignToken mathExpression | Id AssignToken boolExpression | Id AssignToken let;
+simpleLet : id AssignToken mathExpression | id AssignToken boolExpression | id AssignToken let;
 arrayLet: arrayElement AssignToken mathExpression | arrayElement AssignToken boolExpression | arrayElement AssignToken let;
+using: Using id AssignToken id;
 
 return_val: Return (exp)?;
-input: Input (id | arrayElement);
+input: Input id (Comma id)*;
 output: Output outputArgument (Comma outputArgument)*;
 outputArgument: StringLiteral | exp;
 
@@ -153,12 +201,11 @@ callArg: exp; // Некое выражение в аргументе
 call_func: id LBrace callArgList RBrace;
 
 // Условия
-if_cond : If LBrace boolExpression RBrace Then statementSeq End Semicolon #IfSingle
-   | If LBrace boolExpression RBrace Then statementSeq Else statementSeq End Semicolon #IfElse
-   | If LBrace boolExpression RBrace Then statementSeq (Elseif LBrace boolExpression RBrace Then statementSeq)+ Else statementSeq End Semicolon #IfElseIfElse
+if_cond : If LBrace boolExpression RBrace Then statementSeq End #IfSingle
+   | If LBrace boolExpression RBrace Then statementSeq (Elseif LBrace boolExpression RBrace Then statementSeq)* Else statementSeq End #IfElseIfElse
    ;
 
-while_cond: While LBrace boolExpression RBrace Do statementSeq End Semicolon;
+while_cond: While LBrace boolExpression RBrace Do statementSeq End;
 repeat: Repeat statementSeq While LBrace boolExpression RBrace;
 
 // Разбор математических правил
@@ -218,10 +265,14 @@ boolFactor
 	| BoolNot LBrace boolExpression RBrace #BoolAtomBracketsNot
 	;
 
-expAtom: call | arrayLenProperty | arrayElement | id | (IntValue | RealValue | BoolValue) | call_func;
+newExp: New LBrace id RBrace;
+ptrExpAtom: newExp | Nil;
+expAtom: call | arrayLenProperty | arrayElement | id | (IntValue | RealValue | BoolValue) | call_func | StringLiteral | ptrExpAtom | array;
 // Точки -- для указания связт модуль-функция
 id: (Id Point)? Id;
 SimpleType: Real | Integer | Boolean | Character;
+
+array: LABrace (expAtom | (Comma expAtom)*)  RABrace;
 
 exp: mathExpression | boolExpression;
 

@@ -1,35 +1,19 @@
 {
-    "English Version Let":{
+    "Let":{
         "prefix": "let",
         "body": [
             "let ${1:variable} := ${2:expression};"
         ],
         "description": "Snippet for \"let...\""
     },
-    "Russian Version Let":{
-        "prefix": "пусть",
-        "body": [
-            "пусть ${1:переменная} := ${2:выражение};"
-        ],
-        "description": "Сниппет для выражения \"пусть...\""
-    },
-
-    "English Version Import":{
+    "Import":{
         "prefix": "import",
         "body": [
             "import ${1:module}"
         ],
         "description": "Snippet for \"import...\""
     },
-    "Russian Version Import":{
-        "prefix": "подключить",
-        "body": [
-            "подключить ${1:модуль}"
-        ],
-        "description": "Сниппет для выражения \"импорт...\""
-    },
-
-    "English Version Module":{
+    "Module":{
         "prefix": "module",
         "body": [
             "module ${1:name}",
@@ -38,65 +22,33 @@
         ],
         "description": "Snippet for \"module...\""
     },
-    "Russian Version Module":{
-        "prefix": "модуль",
-        "body": [
-            "модуль ${1:имя}",
-            "старт",
-            "конец ${1:имя}."
-        ],
-        "description": "Сниппет для конструкции \"модуль...\""
-    },
 
-    "English Version Variable":{
+    "Variable":{
         "prefix": "variable",
         "body": [
             "variable ${1:type} ${2:name} := ${3:expr};"
         ],
         "description": "Snippet for \"variable...\""
     },
-    "Russian Version Variable":{
-        "prefix": "переменная",
-        "body": [
-            "переменная ${1:тип} ${2:имя} := ${3:выражение};"
-        ],
-        "description": "Сниппет для конструкции \"переменная...\""
-    },
 
-    "English Version Const":{
+    "Const":{
         "prefix": "const",
         "body": [
             "const ${1:type} ${2:name} := ${3:expr};"
         ],
         "description": "Snippet for \"const...\""
     },
-    "Russian Version Const":{
-        "prefix": "константа",
-        "body": [
-            "константа ${1:тип} ${2:имя} := ${3:выражение};"
-        ],
-        "description": "Сниппет для конструкции \"константа...\""
-    },
 
-    "English Version While Loop":{
+    "While Loop":{
         "prefix": "while",
         "body": [
             "while (${1:statement}) do",
             "\t$0",
-            "end;"
+            "end"
         ],
         "description": "Snippet for loop \"while...\""
     },
-    "Russian Version While Loop":{
-        "prefix": "пока",
-        "body": [
-            "пока (${1:условие}) выполнять",
-            "\t$0",
-            "конец;"
-        ],
-        "description": "Сниппет для цикла \"пока...\""
-    },
-    "English Version RepeatWhile Loop":{
+    "RepeatWhile Loop":{
         "prefix": "repeat",
         "body": [
             "repeat",
@@ -105,16 +57,7 @@
         ],
         "description": "Snippet for loop \"repeat...while...\""
     },
-    "Russian Version RepeatWhile Loop":{
-        "prefix": "выполнять",
-        "body": [
-            "выполнять",
-            "\t$0",
-            "пока (${1:условие})"
-        ],
-        "description": "Сниппет для цикла \"выполнять...пока...\""
-    },
-    "English Version Function":{
+    "Function":{
         "prefix": "function",
         "body": [
             "function(${1:${2:access} ${3:value_type} ${4:name_of_var}}): ${5:return_type} ${6:name}",
@@ -123,16 +66,7 @@
         ],
         "description": "Snippet for Function"
     },
-    "Russian Version Function":{
-        "prefix": "функция",
-        "body": [
-            "функция(${1:${2:доступ} ${3:тип} ${4:имя_переменной}}): ${5:тип_возврат} ${6:имя}",
-            "\t$0",
-            "конец"
-        ],
-        "description": "Сниппет для Функции"
-    },
-    "English Version Procedure":{
+    "Procedure":{
         "prefix": "procedure",
         "body": [
             "procedure(${1:${2:access} ${3:value_type} ${4:name_of_var}}): ${5:name of proc}",
@@ -141,38 +75,18 @@
         ],
         "description": "Snippet for Procedure"
     },
-    "Russian Version Procedure":{
-        "prefix": "процедура",
-        "body": [
-            "процедура(${1:${2:доступ} ${3:тип} ${4:имя_переменной}}): ${5:имя}",
-            "\t$0",
-            "конец"
-        ],
-        "description": "Сниппет для Процедуры"
-    },
-    "English Version If-Else":{
+    "If-Else":{
         "prefix": "if else",
         "body": [
             "if (${1:statement}) then",
             "\t$0",
             "else",
             "\t$0",
-            "end;"
+            "end"
         ],
         "description": "Snippet for \"if...else...\""
     },
-    "Russian Version If-Else":{
-        "prefix": "если иначе",
-        "body": [
-            "если (${1:условие}) то",
-            "\t$0",
-            "иначе",
-            "\t$0",
-            "конец;"
-        ],
-        "description": "Сниппет для \"если... иначе...\""
-    },
-    "English Version If-ElseIf-Else":{
+    "If-ElseIf-Else":{
         "prefix": "if elseif else",
         "body": [
             "if (${1:statement}) then",
@@ -181,70 +95,34 @@
             "\t$0",
             "else",
             "\t$0",
-            "end;"
+            "end"
         ],
         "description": "Snippet for \"if... else if... else...\""
     },
-    "Russian Version If-ElseIf-Else":{
-        "prefix": "если иначе",
-        "body": [
-            "если (${1:условие}) то",
-            "\t$0",
-            "иначе если (${2:условие}) то",
-            "\t$0",
-            "иначе",
-            "\t$0",
-            "конец;"
-        ],
-        "description": "Сниппет для \"если... иначе если... иначе...\""
-    },
-    "English Version IfOnly":{
+    "IfOnly":{
         "prefix": "if",
         "body": [
             "if (${1:statement}) then",
             "\t$0",
-            "end;"
+            "end"
         ],
         "description": "Snippet for \"if...\""
     },
-    "Russian Version IfOnly":{
-        "prefix": "если",
-        "body": [
-            "если (${1:условие}) то",
-            "\t$0",
-            "конец;"
-        ],
-        "description": "Сниппет для \"если...\""
-    },
-    "English Version Array":{
+    "Array":{
         "prefix": "array",
         "body": [
             "array [${1:size}] ${2:type} ${3:name}"
         ],
         "description": "Snippet for Array"
     },
-    "Russian Version Array":{
-        "prefix": "массив",
-        "body": [
-            "массив [${1:размер}] ${2:тип} ${3:имя}"
-        ],
-        "description": "Сниппет для Массива"
-    },
-    "English Using": {
+    "Using": {
         "prefix": "using",
         "body": [
             "using ${1:ident} := ${2:value};"
         ],
         "description": "Snippet for using"
     },
-    "Russian Using": {
-        "prefix": "использовать",
-        "body": [
-            "использовать ${1:идент} := ${2:знач};"
-        ],
-        "description": "Сниппет для конструкции 'использовать'"
-    },
-    "English Class": {
+    "Class": {
         "prefix": "class",
         "body": [
             "class ${1:name}",
@@ -252,12 +130,52 @@
         ],
         "description": "Snippet for Class"
     },
-    "Russian Class": {
-        "prefix": "класс",
+    "Pointer":
+    {
+        "prefix": "pointer",
         "body": [
-            "класс ${1:name}",
-            "конец"
+            "pointer(${1:type}) ${2:name}"
         ],
-        "description": "Сниппет для 'класс'"
+        "description": "Snippet for Pointer"
+    },
+    "Method-function":
+    {
+        "prefix": "function",
+        "body": [
+            "(${1:name_of_this}:${2:classname}) function (${3:${4:access} ${5:value_type} ${6:name_of_var}}): ${7:return_type} ${8:name}",
+            "\t$0",
+            "end"
+        ],
+        "description": "Snippet for method-function"
+    },
+    "Method-procedure":
+    {
+        "prefix": "procedure",
+        "body": [
+            "(${1:name_of_this}:${2:classname}) procedure (${3:${4:access} ${5:value_type} ${6:name_of_var}}): ${7:name}",
+            "\t$0",
+            "end"
+        ],
+        "description": "Snippet for procedure"
+    },
+    "Method-function (Abstract)":
+    {
+        "prefix": "function",
+        "body": [
+            "(${1:name_of_this}:${2:classname}) abstract function (${3:${4:access} ${5:value_type} ${6:name_of_var}}): ${7:return_type} ${8:name}",
+            "\t$0",
+            "end"
+        ],
+        "description": "Snippet for method-function (Abstract)"
+    },
+    "Method-procedure (Abstract)":
+    {
+        "prefix": "procedure",
+        "body": [
+            "(${1:name_of_this}:${2:classname}) abstract procedure (${3:${4:access} ${5:value_type} ${6:name_of_var}}): ${7:name}",
+            "\t$0",
+            "end"
+        ],
+        "description": "Snippet for procedure (Abstract)"
     }
 }

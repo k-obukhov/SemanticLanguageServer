@@ -104,11 +104,11 @@
 				"primitive": {
                     "patterns": [
                         {
-                            "match": "\\b(integer|real|boolean|character|class)\\b",
+                            "match": "\\b(integer|real|boolean|character|class|pointer)\\b",
                             "name": "storage.type.primitive.semanticlanguage"
                         },
                         {
-                            "match": "\\b(целое|вещественное|булев|символ|класс)\\b",
+                            "match": "\\b(целое|вещественное|булев|символ|класс|указатель)\\b",
                             "name": "storage.type.primitive.semanticlanguage"
                         }
                     ]
@@ -155,11 +155,11 @@
                 },
                 {
                     "name": "keyword.other.semanticlanguage",
-                    "match": "\\b(nil|true|false|module|import|end|start|let|variable|inherit|base|override|abstract)\\b"
+                    "match": "\\b(nil|true|false|module|import|end|start|let|variable|inherit|base|override|abstract|new)\\b"
                 },
                 {
                     "name": "keyword.other.semanticlanguage",
-                    "match": "\\b(пустое|истина|ложь|модуль|подключить|конец|старт|пусть|переменная|наследует|базовый|перегружает|абстрактный)\\b"
+                    "match": "\\b(пустое|истина|ложь|модуль|подключить|конец|старт|пусть|переменная|наследует|базовый|перегружает|абстрактный|новый)\\b"
                 }
             ]
         },
