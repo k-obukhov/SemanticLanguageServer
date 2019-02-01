@@ -233,14 +233,14 @@
     "English Using": {
         "prefix": "using",
         "body": [
-            "using ${1:ident} ${2:value};"
+            "using ${1:ident} := ${2:value};"
         ],
         "description": "Snippet for using"
     },
     "Russian Using": {
         "prefix": "использовать",
         "body": [
-            "использовать ${1:идент} ${2:знач};"
+            "использовать ${1:идент} := ${2:знач};"
         ],
         "description": "Сниппет для конструкции 'использовать'"
     },
