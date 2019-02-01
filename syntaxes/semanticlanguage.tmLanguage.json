@@ -155,11 +155,11 @@
                 },
                 {
                     "name": "keyword.other.semanticlanguage",
-                    "match": "\\b(nil|true|false|module|import|end|start|let|variable|new|inherit|base|override|abstract)\\b"
+                    "match": "\\b(nil|true|false|module|import|end|start|let|variable|inherit|base|override|abstract)\\b"
                 },
                 {
                     "name": "keyword.other.semanticlanguage",
-                    "match": "\\b(пустое|истина|ложь|модуль|подключить|конец|старт|пусть|переменная|новый|наследует|базовый|перегружает|абстрактный)\\b"
+                    "match": "\\b(пустое|истина|ложь|модуль|подключить|конец|старт|пусть|переменная|наследует|базовый|перегружает|абстрактный)\\b"
                 }
             ]
         },
