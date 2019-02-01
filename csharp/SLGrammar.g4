@@ -272,7 +272,7 @@ expAtom: call | arrayLenProperty | arrayElement | id | (IntValue | RealValue | B
 id: (Id Point)? Id;
 SimpleType: Real | Integer | Boolean | Character;
 
-array: LABrace (expAtom (Comma expAtom)*)  RABrace;
+array: LABrace (expAtom (Comma expAtom)*)?  RABrace;
 
 exp: mathExpression | boolExpression;
 
