@@ -86,7 +86,7 @@ Nil: 'nil'; // значение null
 Pointer: 'pointer'; // указатель
 
 typeName: scalarType | arrayType;
-ptrType: Pointer LBrace id RBrace; // id -- тип
+ptrType: Pointer (LBrace id RBrace)?; // id -- тип
 scalarType: simpleType | functionalType | id | ptrType;
 functionalType: procedureType | functionType; // Функциональный тип = процедуры и функции
 simpleType : SimpleType; // Встроенные типы 
