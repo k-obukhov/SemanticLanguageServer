@@ -138,7 +138,7 @@ classDeclare: AccessModifier base_head Class Id inherit_head classStatements End
 classStatements: (methodDeclare | raw | fieldDeclare)*;
 methodDeclare: methodFuncDeclare | methodProcDeclare | methodFuncAbstract | methodProcAbstract;
 
-thisHeader: LBrace Id Colon id RBrace;
+thisHeader: LBrace functionalDeclareArg  RBrace;
 
 methodFuncAbstract: AccessModifier Abstract thisHeader Function functionalDeclareArgList Colon typeName Id Semicolon;
 methodProcAbstract: AccessModifier Abstract thisHeader Procedure functionalDeclareArgList Id Semicolon;
@@ -177,7 +177,7 @@ varDeclare: scalarDeclare | arrayDeclare | ptrDeclare;
 
 scalarDeclare: Variable scalarType Id (AssignToken mathExpression | AssignToken boolExpression)?;
 arrayDeclare: arrayDeclareType Id (AssignToken mathExpression)?; // выражение
-ptrDeclare: Variable ptrType Id (AssignToken mathExpression)?; // всего скорее, без адресной арифметики -- нужен только expAtom для указателей -- new, nil
+ptrDeclare: ptrType Id (AssignToken mathExpression)?; // всего скорее, без адресной арифметики -- нужен только expAtom для указателей -- new, nil
 
 arrayDeclareType: ArrayToken (arrayDeclareDimention)+ scalarType;
 arrayDeclareDimention: LSBrace mathExpression RSBrace;
