@@ -142,7 +142,7 @@
     {
         "prefix": "function",
         "body": [
-            "${1:access_modifier} (${2:name_of_this}:${3:classname}) function (${4:${5:access} ${6:value_type} ${7:name_of_var}}): ${8:return_type} ${9:name}",
+            "${1:access_modifier} (ref ${2:class_of_this} ${3:name}) function (${4:${5:access} ${6:value_type} ${7:name_of_var}}): ${8:return_type} ${9:name}",
             "\t$0",
             "end"
         ],
@@ -152,7 +152,7 @@
     {
         "prefix": "procedure",
         "body": [
-            "${1:access_modifier} (${2:name_of_this}:${3:classname}) procedure (${4:${5:access} ${6:value_type} ${7:name_of_var}}): ${8:name}",
+            "${1:access_modifier} (ref ${2:class_of_this} ${3:name}) procedure (${4:${5:access} ${6:value_type} ${7:name_of_var}}): ${8:name}",
             "\t$0",
             "end"
         ],
@@ -162,7 +162,7 @@
     {
         "prefix": "function",
         "body": [
-            "${1:access_modifier} abstract (${2:name_of_this}:${3:classname}) function (${4:${5:access} ${6:value_type} ${7:name_of_var}}): ${8:return_type} ${9:name};"
+            "${1:access_modifier} abstract (ref ${2:class_of_this} ${3:name}) function (${4:${5:access} ${6:value_type} ${7:name_of_var}}): ${8:return_type} ${9:name};"
         ],
         "description": "Snippet for method-function (Abstract)"
     },
@@ -170,7 +170,7 @@
     {
         "prefix": "procedure",
         "body": [
-            "${1:access_modifier} abstract (${2:name_of_this}:${3:classname}) procedure (${4:${5:access} ${6:value_type} ${7:name_of_var}}): ${8:name};"
+            "${1:access_modifier} abstract (ref ${2:class_of_this} ${3:name}) procedure (${4:${5:access} ${6:value_type} ${7:name_of_var}}): ${8:name};"
         ],
         "description": "Snippet for procedure (Abstract)"
     },
